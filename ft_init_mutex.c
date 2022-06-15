@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_args.c                                        :+:      :+:    :+:   */
+/*   ft_init_mutex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 18:08:30 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/15 16:42:06 by uisroilo         ###   ########.fr       */
+/*   Created: 2022/06/15 12:23:30 by uisroilo          #+#    #+#             */
+/*   Updated: 2022/06/15 16:41:55 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_init_args(int argc, char **argv, t_prog **data)
+void	ft_init_mutex(t_prog **data)
 {
-	(*data)->philo_nums = ft_atoi(argv[1]);
-	(*data)->time_die = ft_atoi(argv[2]);
-	(*data)->time_eat = ft_atoi(argv[3]);
-	(*data)->time_sleep = ft_atoi(argv[4]);
-	if (argc == 6)
-		(*data)->eat_nums = ft_atoi(argv[5]);
-	else
-		(*data)->eat_nums = 0;
+	int	i;
+
+	i = 0;
+	while (i < (*data)->philo_nums)
+	{
+		pthread_mutex_init(&(*data)->mutex[i], NULL);
+		i++;
+	}
+}
+
+void	ft_destroy_mutex(t_prog **data)
+{
+	int	i;
+
+	i = 0;
+	while (i < (*data)->philo_nums)
+	{
+		pthread_mutex_destroy(&(*data)->mutex[i]);
+		i++;
+	}
 }
