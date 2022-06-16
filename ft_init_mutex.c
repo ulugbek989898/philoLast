@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 12:23:30 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/15 16:41:55 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/16 21:06:38 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_init_mutex(t_prog **data)
 		pthread_mutex_init(&(*data)->mutex[i], NULL);
 		i++;
 	}
+	pthread_mutex_init(&(*data)->main_mutex, NULL);
 }
 
 void	ft_destroy_mutex(t_prog **data)
@@ -34,4 +35,5 @@ void	ft_destroy_mutex(t_prog **data)
 		pthread_mutex_destroy(&(*data)->mutex[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&(*data)->main_mutex);
 }
