@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:55 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/16 21:12:25 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/17 09:57:38 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_philos
 	int				time_die;
 	int				time_eat;
 	int				time_sleep;
+	int				philo_nums;
 	int				id;
 	int				last_eating_time;
 	int				fork;

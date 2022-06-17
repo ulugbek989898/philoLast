@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:08:30 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/16 21:13:22 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/17 09:58:09 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_init_args(int argc, char **argv, t_prog **data)
 	i = 0;
 	while (i < (*data)->philo_nums)
 	{
+		(*data)->philos[i].philo_nums = ft_atoi(argv[1]);
 		(*data)->philos[i].time_die = ft_atoi(argv[2]);
 		(*data)->philos[i].time_eat = ft_atoi(argv[3]);
 		(*data)->philos[i].time_sleep = ft_atoi(argv[4]);

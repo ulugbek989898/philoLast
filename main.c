@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:49:02 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/16 21:16:26 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/17 10:42:14 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_write_msg(char *str, int id, t_philos *r_data)
 {
 	pthread_mutex_lock(&r_data->main_struct->main_mutex);
-	printf("%d %s\n", id, str);
+	printf("%d %s\n", id + 1, str);
 	pthread_mutex_unlock(&r_data->main_struct->main_mutex);
 }
 
@@ -27,31 +27,40 @@ void	ft_create_print(t_philos *r_data, int i)
 	pthread_mutex_lock(&(*r_data).main_struct->mutex[i]);
 	if ((*r_data).fork == 0)
 	{
-		pthread_mutex_lock(&(*r_data).main_struct->mutex[i + 1]);
-		if ((*r_data).main_struct->philos[i + 1].fork == 0)
+		pthread_mutex_unlock(&(*r_data).main_struct->mutex[i]);
+		pthread_mutex_lock(&(*r_data).main_struct->mutex[(i + 1) % (*r_data).philo_nums]);
+		if ((*r_data).main_struct->philos[(i + 1) % (*r_data).philo_nums].fork == 0)
 		{
+			pthread_mutex_unlock(&(*r_data).main_struct->mutex[(i + 1) % (*r_data).philo_nums]);
 			waiter = 5;
 			(*r_data).fork = 2;
-			(*r_data).main_struct->philos[i + 1].fork = 2;
-			pthread_mutex_unlock(&(*r_data).main_struct->mutex[i + 1]);
+			(*r_data).main_struct->philos[(i + 1) % (*r_data).philo_nums].fork = 2;
 		}
 		else
-			pthread_mutex_unlock(&(*r_data).main_struct->mutex[i + 1]);
-		pthread_mutex_unlock(&(*r_data).main_struct->mutex[i]);
+		{
+			pthread_mutex_unlock(&(*r_data).main_struct->mutex[(i + 1) % (*r_data).philo_nums]);
+			printf("salom %d\n", i + 1);
+		}
 	}
 	else
+	{
 		pthread_mutex_unlock(&(*r_data).main_struct->mutex[i]);
+		printf("salom1 %d\n", i + 1);
+	}
 	if (waiter == 5)
 	{
 		ft_write_msg("has taken a fork", (*r_data).id, r_data);
 		ft_write_msg("is eating", (*r_data).id, r_data);
 		usleep(r_data->time_eat);
 		pthread_mutex_lock(&(*r_data).main_struct->mutex[i]);
-		pthread_mutex_lock(&(*r_data).main_struct->mutex[i + 1]);
+		pthread_mutex_lock(&(*r_data).main_struct->mutex[(i + 1) % (*r_data).philo_nums]);
 		(*r_data).fork = 0;
-		(*r_data).main_struct->philos[i + 1].fork = 0;
-		pthread_mutex_unlock(&(*r_data).main_struct->mutex[i + 1]);
+		(*r_data).main_struct->philos[(i + 1) % (*r_data).philo_nums].fork = 0;
+		pthread_mutex_unlock(&(*r_data).main_struct->mutex[(i + 1) % (*r_data).philo_nums]);
 		pthread_mutex_unlock(&(*r_data).main_struct->mutex[i]);
+		ft_write_msg("is sleeping", (*r_data).id, r_data);
+		usleep(r_data->time_sleep);
+		ft_write_msg("is thinking", (*r_data).id, r_data);
 	}
 }
 
@@ -62,7 +71,7 @@ void	*print(void *data)
 
 	i = 0;
 	r_data = (t_philos *)data;
-	while (i < 2)
+	while (i < 1)
 	{
 		ft_create_print(r_data, (*r_data).id);
 		i++;
