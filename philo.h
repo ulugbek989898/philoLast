@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:55 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/18 09:16:07 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:26:16 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_philos
 	int				time_sleep;
 	int				philo_nums;
 	int				id;
-	int				last_eating_time;
+	long long		last_eating_time;
 	int				fork;
 	struct s_prog	*main_struct;
 }	t_philos;
@@ -40,6 +40,7 @@ typedef struct s_prog
 	long long		init_time;
 	pthread_mutex_t	mutex[200];
 	pthread_mutex_t	main_mutex;
+	pthread_mutex_t	meal_check;
 	pthread_t		threads[200];
 	t_philos		philos[200];
 }	t_prog;

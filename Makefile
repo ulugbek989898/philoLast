@@ -6,7 +6,7 @@
 #    By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 16:51:11 by uisroilo          #+#    #+#              #
-#    Updated: 2022/06/17 20:48:30 by uisroilo         ###   ########.fr        #
+#    Updated: 2022/06/18 18:39:51 by uisroilo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS	= main.c check_arguments.c ft_atoi.c init_args.c ft_init_mutex.c \
 		ft_create_join.c time.c
 OBJS		= $(SRCS:.c=.o)
 
-CC			= gcc -pthread
+CC			= gcc -g3 -pthread
 CFLAGS		= -Wall -Wextra -Werror
 
 RM			= rm -rf
