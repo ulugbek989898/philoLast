@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:55 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/17 09:57:38 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/18 09:16:07 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_philos
 {
@@ -34,16 +35,22 @@ typedef struct s_prog
 {
 	int				philo_nums;
 	int				eat_nums;
+	int				died;
+	int				count;
+	long long		init_time;
 	pthread_mutex_t	mutex[200];
 	pthread_mutex_t	main_mutex;
 	pthread_t		threads[200];
 	t_philos		philos[200];
 }	t_prog;
 
-int		ft_atoi(const char *str);
-int		check_arguments(int argc, char **argv);
-void	ft_init_args(int argc, char **argv, t_prog **data);
-void	ft_init_mutex(t_prog **data);
-void	ft_destroy_mutex(t_prog **data);
-void	ft_create_join(t_prog **data);
+int			ft_atoi(const char *str);
+int			check_arguments(int argc, char **argv);
+void		ft_init_args(int argc, char **argv, t_prog **data);
+void		ft_init_mutex(t_prog **data);
+void		ft_destroy_mutex(t_prog **data);
+void		ft_create_join(t_prog **data);
+long long	time_diff(long long past, long long pres);
+void		ft_sleep(long long time, t_prog *data);
+long long	timestamp(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:49:02 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/17 16:04:55 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/18 09:27:02 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_write_msg(char *str, int id, t_philos *r_data)
 {
 	pthread_mutex_lock(&r_data->main_struct->main_mutex);
+	printf("%lld ", timestamp() - r_data->main_struct->init_time);
 	printf("%d %s\n", id + 1, str);
 	pthread_mutex_unlock(&r_data->main_struct->main_mutex);
 }
@@ -38,6 +39,7 @@ void	ft_create_print(t_philos *r_data, int i)
 		}
 		else
 		{
+			printf("Hello id %d\n", i + 1);
 			pthread_mutex_lock(&(*r_data).main_struct->mutex[i]);
 			(*r_data).fork = 0;
 			pthread_mutex_unlock(&(*r_data).main_struct->mutex[i]);
@@ -47,13 +49,14 @@ void	ft_create_print(t_philos *r_data, int i)
 	else
 	{
 		pthread_mutex_unlock(&(*r_data).main_struct->mutex[i]);
+		printf("Hello id %d\n", i + 1);
 	}
 	if (waiter)
 	{
 		ft_write_msg("has taken a fork", (*r_data).id, r_data);
 		ft_write_msg("has taken a fork", (*r_data).id, r_data);
 		ft_write_msg("is eating", (*r_data).id, r_data);
-		usleep(r_data->time_eat);
+		ft_sleep(r_data->time_eat, (*r_data).main_struct);
 		pthread_mutex_lock(&(*r_data).main_struct->mutex[i]);
 		pthread_mutex_lock(&(*r_data).main_struct->mutex[(i + 1) % (*r_data).philo_nums]);
 		(*r_data).fork = 0;
@@ -61,7 +64,7 @@ void	ft_create_print(t_philos *r_data, int i)
 		pthread_mutex_unlock(&(*r_data).main_struct->mutex[(i + 1) % (*r_data).philo_nums]);
 		pthread_mutex_unlock(&(*r_data).main_struct->mutex[i]);
 		ft_write_msg("is sleeping", (*r_data).id, r_data);
-		usleep(r_data->time_sleep);
+		ft_sleep(r_data->time_sleep, (*r_data).main_struct);
 		ft_write_msg("is thinking", (*r_data).id, r_data);
 	}
 }
@@ -86,6 +89,7 @@ void	ft_create_thread(t_prog **data)
 	int	i;
 
 	i = 0;
+	(*data)->init_time = timestamp();
 	while (i < (*data)->philo_nums)
 	{
 		if (pthread_create(&(*data)->threads[i], NULL, &print, &(*data)->philos[i]))
