@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:55 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/18 17:26:16 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/19 16:54:57 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_philos
 	int				id;
 	long long		last_eating_time;
 	int				fork;
+	int				greed;
 	struct s_prog	*main_struct;
 }	t_philos;
 
@@ -40,6 +41,7 @@ typedef struct s_prog
 	long long		init_time;
 	pthread_mutex_t	mutex[200];
 	pthread_mutex_t	main_mutex;
+	pthread_mutex_t	mutex_died;
 	pthread_mutex_t	meal_check;
 	pthread_t		threads[200];
 	t_philos		philos[200];
@@ -54,4 +56,5 @@ void		ft_create_join(t_prog **data);
 long long	time_diff(long long past, long long pres);
 void		ft_sleep(long long time, t_prog *data);
 long long	timestamp(void);
+void		ft_write_msg(char *str, int id, t_philos *r_data);
 #endif

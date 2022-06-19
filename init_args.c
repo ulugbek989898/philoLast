@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:08:30 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/18 09:16:35 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/19 16:57:01 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	ft_init_args(int argc, char **argv, t_prog **data)
 		(*data)->philos[i].time_sleep = ft_atoi(argv[4]);
 		(*data)->philos[i].id = i;
 		(*data)->philos[i].main_struct = *data;
-		(*data)->philos->fork = 0;
+		(*data)->philos[i].fork = 0;
+		(*data)->philos[i].greed = 10000;
 		i++;
 	}
 	(*data)->died = 0;

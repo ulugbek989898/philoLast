@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 20:47:43 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/17 20:51:39 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/19 14:20:02 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,19 @@ long long	time_diff(long long past, long long pres)
 
 void	ft_sleep(long long time, t_prog *data)
 {
-	long long i;
+	long long	i;
+	int			d;
 
+	
 	i = timestamp();
-	while (!(data->died))
+	while (1)
 	{
+		
+		pthread_mutex_lock(&(data)->mutex_died);
+		d = data->died;
+		pthread_mutex_unlock(&(data)->mutex_died);
+		if (d)
+			break ;
 		if (time_diff(i, timestamp()) >= time)
 			break ;
 		usleep(50);
