@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:49:02 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/19 17:08:40 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:23:09 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_create_print(t_philos *r_data, int i)
 		ft_sleep(r_data->time_eat, (*r_data).main_struct);
 		pthread_mutex_lock(&(*r_data).main_struct->mutex[i]);
 		(*r_data).fork = 0;
+		(*r_data).philo_ate++;
 		pthread_mutex_unlock(&(*r_data).main_struct->mutex[i]);
 		pthread_mutex_lock(&(*r_data).main_struct->mutex[(i + 1) % (*r_data).philo_nums]);
 		(*r_data).main_struct->philos[(i + 1) % (*r_data).philo_nums].fork = 0;
@@ -70,14 +71,16 @@ void	*routine(void *data)
 	t_philos	*r_data;
 	int			i;
 	int			d;
+	int			all_ate;
 	i = 0;
 	r_data = (t_philos *)data;
 	while (1)
 	{
 		pthread_mutex_lock(&(r_data->main_struct->mutex_died));
 		d = r_data->main_struct->died;
+		all_ate = r_data->main_struct->all_ate;
 		pthread_mutex_unlock(&(r_data->main_struct->mutex_died));
-		if (d)
+		if (d || all_ate)
 			break ;
 		ft_create_print(r_data, (*r_data).id);
 		i++;
@@ -98,6 +101,7 @@ void	ft_create_thread(t_prog **data)
 		pthread_mutex_lock(&(*data)->mutex[i]);
 		(*data)->philos[i].last_eating_time = timestamp();
 		pthread_mutex_unlock(&(*data)->mutex[i]);
+		usleep(100);
 		i++;
 	}
 }
@@ -108,7 +112,7 @@ void	ft_death_check(t_prog **data)
 	int	d;
 	long long	last_ate_time;
 	
-	while (1)
+	while (!((*data)->all_ate))
 	{
 		i=0;
 		pthread_mutex_lock(&(*data)->mutex_died);
@@ -134,6 +138,11 @@ void	ft_death_check(t_prog **data)
 			usleep(100);
 			i++;
 		}
+		i = 0;
+		while ((*data)->eat_nums && i < (*data)->philo_nums && (*data)->philos[i].philo_ate >= (*data)->eat_nums)
+			i++;
+		if (i == (*data)->philo_nums)
+			(*data)->all_ate = 1;
 	}
 }
 

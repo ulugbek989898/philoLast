@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:55 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/19 16:54:57 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/20 11:55:30 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_philos
 	int				time_sleep;
 	int				philo_nums;
 	int				id;
+	int				philo_ate;
 	long long		last_eating_time;
 	int				fork;
 	int				greed;
@@ -36,6 +37,7 @@ typedef struct s_prog
 {
 	int				philo_nums;
 	int				eat_nums;
+	int				all_ate;
 	int				died;
 	int				count;
 	long long		init_time;
