@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 20:47:43 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/19 20:14:59 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/20 20:02:00 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	ft_sleep(long long time, t_prog *data)
 			break ;
 		if (time_diff(i, timestamp()) >= time)
 			break ;
-		usleep(50);
+		usleep(100);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 18:08:30 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/20 11:56:11 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:57:01 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ft_init_args(int argc, char **argv, t_prog **data)
 		(*data)->philos[i].fork = 0;
 		(*data)->philos[i].greed = 10000;
 		(*data)->philos[i].philo_ate = 0;
+		(*data)->philos[i].waiter = 0;
+		(*data)->philos[i].meal_nums = (*data)->eat_nums;
 		i++;
 	}
 	(*data)->died = 0;
