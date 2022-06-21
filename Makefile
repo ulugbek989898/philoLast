@@ -6,14 +6,14 @@
 #    By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 16:51:11 by uisroilo          #+#    #+#              #
-#    Updated: 2022/06/19 13:41:05 by uisroilo         ###   ########.fr        #
+#    Updated: 2022/06/22 01:33:23 by uisroilo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= philo
 
 SRCS	= main.c check_arguments.c ft_atoi.c init_args.c ft_init_mutex.c \
-		ft_create_join.c time.c ft_write_msg.c
+		ft_create_join.c time.c ft_write_msg.c routine.c
 OBJS		= $(SRCS:.c=.o)
 
 CC			= gcc -g3 -pthread

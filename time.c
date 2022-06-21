@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 20:47:43 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/20 20:02:00 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/22 01:35:12 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ void	ft_sleep(long long time, t_prog *data)
 	long long	i;
 	int			d;
 
-	
 	i = timestamp();
 	while (1)
 	{
-		
 		pthread_mutex_lock(&(data)->mutex_died);
 		d = data->died;
 		pthread_mutex_unlock(&(data)->mutex_died);
