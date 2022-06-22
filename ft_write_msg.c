@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 13:41:18 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/22 06:29:45 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:26:15 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,16 @@ void	ft_write_msg(char *str, int id, t_philos *r_data)
 
 	pthread_mutex_lock(&(*r_data).m_struct->mutex_died);
 	d = r_data->m_struct->died;
-	pthread_mutex_unlock(&(*r_data).m_struct->mutex_died);
 	if (!d)
 	{
-		pthread_mutex_lock(&r_data->m_struct->main_mutex1);
 		ft_putnbr(timestamp() - r_data->m_struct->init_time);
 		ft_putchar(' ');
 		ft_putnbr(id + 1);
 		ft_putchar(' ');
 		ft_putstr(str);
 		ft_putchar('\n');
-		pthread_mutex_unlock(&r_data->m_struct->main_mutex1);
 	}
+	pthread_mutex_unlock(&(*r_data).m_struct->mutex_died);
 }
 
 void	ft_write_msg1(char *str, int id, t_philos *r_data)
@@ -76,16 +74,14 @@ void	ft_write_msg1(char *str, int id, t_philos *r_data)
 
 	pthread_mutex_lock(&(*r_data).m_struct->mutex_died);
 	d = r_data->m_struct->died;
-	pthread_mutex_unlock(&(*r_data).m_struct->mutex_died);
 	if (d)
 	{
-		pthread_mutex_lock(&r_data->m_struct->main_mutex1);
 		ft_putnbr(timestamp() - r_data->m_struct->init_time);
 		ft_putchar(' ');
 		ft_putnbr(id + 1);
 		ft_putchar(' ');
 		ft_putstr(str);
 		ft_putchar('\n');
-		pthread_mutex_unlock(&r_data->m_struct->main_mutex1);
 	}
+	pthread_mutex_unlock(&(*r_data).m_struct->mutex_died);
 }

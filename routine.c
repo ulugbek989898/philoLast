@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 01:30:35 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/22 06:18:54 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:07:29 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	ft_eat_sleep_think(t_philos *r_data, int i)
 	if (died || all_ate)
 		return ;
 	ft_write_msg("is thinking", (*r_data).id, r_data);
-	(*r_data).waiter = 0;if (died || all_ate)
+	(*r_data).waiter = 0;
+	if (died || all_ate)
 		return ;
 }
 
@@ -128,7 +129,7 @@ void	*routine(void *data)
 			ft_create_print(r_data, (*r_data).id);
 		else
 			ft_create_print1(r_data, (*r_data).id);
-		usleep(100);
+		usleep(50);
 		i++;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:49:02 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/22 04:26:46 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/22 21:32:58 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_create_thread(t_prog **data)
 		pthread_mutex_lock(&(*data)->mutex[i]);
 		(*data)->philos[i].last_eating_time = timestamp();
 		pthread_mutex_unlock(&(*data)->mutex[i]);
-		usleep(50);
 		i++;
 	}
 }
@@ -96,6 +95,7 @@ int	main(int argc, char **argv)
 	{
 		usleep(data->philos[0].time_die);
 		printf("%d %d is died\n", data->philos[0].time_die, data->ph_num);
+		free(data);
 		return (0);
 	}
 	ft_init_mutex(&data);
