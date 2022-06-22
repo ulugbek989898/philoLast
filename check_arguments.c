@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 12:18:41 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/15 12:13:29 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/22 04:30:38 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@ int	ft_isdigit(char *str)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+			i++;
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')
@@ -58,7 +62,7 @@ int	check_arguments(int argc, char **argv)
 		write(2, "Philos num are not good! Try again.\n", 36);
 		return (1);
 	}
-	if (ft_isdigit(argv[2]) || ft_isdigit(argv[2]) || ft_isdigit(argv[2]))
+	if (ft_isdigit(argv[2]) || ft_isdigit(argv[3]) || ft_isdigit(argv[4]))
 	{
 		write(2, "Given Time is not proper value. Try again.\n", 44);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: uisroilo <uisroilo@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:49:02 by uisroilo          #+#    #+#             */
-/*   Updated: 2022/06/22 01:34:33 by uisroilo         ###   ########.fr       */
+/*   Updated: 2022/06/22 04:26:46 by uisroilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,16 @@ int	main(int argc, char **argv)
 		return (1);
 	data = malloc(sizeof(t_prog));
 	ft_init_args(argc, argv, &data);
+	if (data->ph_num == 1)
+	{
+		usleep(data->philos[0].time_die);
+		printf("%d %d is died\n", data->philos[0].time_die, data->ph_num);
+		return (0);
+	}
 	ft_init_mutex(&data);
 	ft_create_thread(&data);
 	ft_death_check(&data);
 	ft_create_join(&data);
 	ft_destroy_mutex(&data);
+	free(data);
 }
